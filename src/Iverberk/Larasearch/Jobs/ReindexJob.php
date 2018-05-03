@@ -48,11 +48,9 @@ class ReindexJob implements ShouldQueue
             } catch (Exception $e) {
                 $logger->error('Indexing ' . $class . ' with ID: ' . $id . ' failed: ' . $e->getMessage());
 
-                $this->release(60);
+                $this->fail($e);
             }
         }
-
-        $this->delete();
     }
 
     /**
