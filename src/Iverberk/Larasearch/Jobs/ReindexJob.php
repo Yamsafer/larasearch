@@ -61,6 +61,6 @@ class ReindexJob implements ShouldQueue
      */
     public function tags()
     {
-        return [$this->models];
+        return $this->models;
     }
 }
