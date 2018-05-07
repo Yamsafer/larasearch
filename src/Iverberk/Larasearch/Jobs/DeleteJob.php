@@ -66,6 +66,6 @@ class DeleteJob implements ShouldQueue
      */
     public function tags()
     {
-        return [$this->models];
+        return $this->models;
     }
 }
