@@ -50,6 +50,7 @@ class DeleteJob implements ShouldQueue
 
             try {
                 $model->deleteDoc($id);
+                $this->delete();
             } catch (\Exception $e) {
                 $logger->error('Deleting ' . $class . ' with ID: ' . $id . ' failed: ' . $e->getMessage());
 
