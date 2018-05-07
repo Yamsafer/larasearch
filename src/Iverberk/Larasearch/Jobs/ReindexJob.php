@@ -45,14 +45,13 @@ class ReindexJob implements ShouldQueue
             try {
                 $model = $class::findOrFail($id);
                 $model->refreshDoc($model);
+                $this->delete();
             } catch (Exception $e) {
                 $logger->error('Indexing ' . $class . ' with ID: ' . $id . ' failed: ' . $e->getMessage());
 
-                $this->release(60);
+                $this->fail($e);
             }
         }
-
-        $this->delete();
     }
 
     /**
