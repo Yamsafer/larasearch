@@ -29,7 +29,7 @@
             "tests/Support"
         ],
         "files": [
-            "Iverberk\\Larasearch\\helpers.php"
+            "src/helpers.php"
         ]
     },
     "extra": {
