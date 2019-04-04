@@ -27,6 +27,9 @@
         "classmap": [
             "tests/Support/Stubs",
             "tests/Support"
+        ],
+        "files": [
+            "src/Iverberk/Larasearch/helpers.php"
         ]
     },
     "extra": {

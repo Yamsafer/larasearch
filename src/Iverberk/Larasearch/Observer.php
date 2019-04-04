@@ -74,7 +74,7 @@ class Observer
                                     // Apparently the relation doesn't exist on this model, so skip the rest of the path as well
                                     return;
                                 }
-                            } elseif (in_array('Iverberk\Larasearch\Traits\SearchableTrait', class_uses($record))) {
+                            } elseif (in_array('Iverberk\Larasearch\Traits\SearchableTrait', class_uses_deep($record))) {
                                 $affectedModels[] = get_class($record) . ':' . $record->getKey();
                             }
                         }
@@ -82,7 +82,7 @@ class Observer
                 };
 
                 $walk($model->getRelation(array_shift($path)), $path);
-            } elseif ( ! $excludeCurrent && in_array('Iverberk\Larasearch\Traits\SearchableTrait', class_uses($model))) {
+            } elseif ( ! $excludeCurrent && in_array('Iverberk\Larasearch\Traits\SearchableTrait', class_uses_deep($model))) {
                 $affectedModels[] = get_class($model) . ':' . $model->getKey();
             }
         }
