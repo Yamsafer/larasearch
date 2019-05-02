@@ -1,8 +1,8 @@
 <?php namespace Iverberk\Larasearch;
 
 use Monolog\Logger;
-use Elasticsearch\Client;
 use Monolog\Handler\NullHandler;
+use Iverberk\Larasearch\ClientManager;
 use Illuminate\Support\ServiceProvider;
 use Iverberk\Larasearch\Response\Result;
 use Iverberk\Larasearch\Commands\PathsCommand;
@@ -81,9 +81,8 @@ class LarasearchServiceProvider extends ServiceProvider
      */
     protected function bindElasticsearch()
     {
-        $this->app->singleton('Elasticsearch', function ($app)
-        {
-            return new Client(\Illuminate\Support\Facades\Config::get('larasearch.elasticsearch.params'));
+        $this->app->bind('Elasticsearch', function ($app, $params) {
+            return ClientManager::getClient($params['model']);
         });
     }
 

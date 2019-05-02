@@ -25,7 +25,7 @@ class Proxy
         $this->config['model'] = $model;
         $this->config['type'] = str_singular($model->getTable());
 
-        $this->config['client'] = App::make('Elasticsearch');
+        $this->config['client'] = App::makeWith('Elasticsearch', ['model' => $model]);
         $this->config['index'] = App::makeWith('iverberk.larasearch.index', ['proxy' => $this]);
     }
 
@@ -205,6 +205,24 @@ class Proxy
                 'index' => $this->getIndex()->getName(),
                 'type'  => $this->getType(),
                 'body'  => $model->transform()
+            ]
+        );
+    }
+
+    /**
+     * update a specific property record on Elasticsearch
+     */
+    public function updateDoc($model)
+    {
+        $this->config['client']->update(
+            [
+                'id'    => $model->getEsId(),
+                'index' => $this->getIndex()->getName(),
+                'type'  => $this->getType(),
+                'body'  => [
+                    'doc_as_upsert' => true,
+                    'doc' => $model->transform(),
+                ],
             ]
         );
     }

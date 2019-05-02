@@ -30,6 +30,11 @@ trait SearchableTrait
     public static $__es_enable = true;
 
     /**
+     * @var integer
+     */
+    protected static $__es_version = 1;
+
+    /**
      * Return an instance of the Elasticsearch proxy
      *
      * @throws \Exception
@@ -106,5 +111,19 @@ trait SearchableTrait
     public function getEsId()
     {
         return $this->getKey();
+    }
+
+    /**
+     * Get elastic version
+     *
+     * @return integer
+     */
+    public function esVersion()
+    {
+        if (isset($this->elasticVersion)) {
+            return $this->elasticVersion;
+        }
+
+        return static::$__es_version;
     }
 }
