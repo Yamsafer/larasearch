@@ -129,7 +129,7 @@ class Index
         }
 
         if ($index_suffix && ! Str::endsWith($name, $index_suffix)) {
-            $name .= $index_suffix;  
+            $name .= $index_suffix;
         }
 
         $this->name = $name;
