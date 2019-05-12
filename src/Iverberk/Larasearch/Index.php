@@ -122,8 +122,14 @@ class Index
     public function setName($name)
     {
         $index_prefix = Config::get('larasearch.elasticsearch.index_prefix', '');
+        $index_suffix = Config::get('larasearch.elasticsearch.index_suffix', '');
+
         if ($index_prefix && ! Str::startsWith($name, $index_prefix)) {
             $name = $index_prefix . $name;
+        }
+
+        if ($index_suffix && ! Str::endsWith($name, $index_suffix)) {
+            $name .= $index_suffix;
         }
 
         $this->name = $name;

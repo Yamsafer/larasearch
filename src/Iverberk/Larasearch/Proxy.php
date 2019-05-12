@@ -210,6 +210,24 @@ class Proxy
     }
 
     /**
+     * update a specific property record on Elasticsearch
+     */
+    public function updateDoc($model)
+    {
+        $this->config['client']->update(
+            [
+                'id'    => $model->getEsId(),
+                'index' => $this->getIndex()->getName(),
+                'type'  => $this->getType(),
+                'body'  => [
+                    'doc_as_upsert' => true,
+                    'doc' => $model->transform(),
+                ],
+            ]
+        );
+    }
+
+    /**
      * Delete a specific database record within Elasticsearch
      *
      * @param $id Eloquent id of model object
