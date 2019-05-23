@@ -219,6 +219,7 @@ class Proxy
                 'id'    => $model->getEsId(),
                 'index' => $this->getIndex()->getName(),
                 'type'  => $this->getType(),
+                'retry_on_conflict' => 2,
                 'body'  => [
                     'doc_as_upsert' => true,
                     'doc' => $model->transform(),
